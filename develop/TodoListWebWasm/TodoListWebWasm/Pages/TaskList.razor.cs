@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using Blazored.Toast.Services;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,7 @@ namespace TodoListWebWasm.Pages
     {
         [Inject] private ITaskApiClient TaskApiClient { get; set; }
         [Inject] private IUserApiClient UserApiClient { get; set; }
+        [Inject] private IToastService ToastService { get; set; }
 
         private List<TaskDto> Tasks;
         private List<AssigneeDto> Assignees;
@@ -28,7 +30,13 @@ namespace TodoListWebWasm.Pages
 
         private async Task SearchForm(EditContext context)
         {
-            Tasks = await TaskApiClient.GetTaskList(TaskListSearch);
+            //ToastService.ShowInfo("Thông là thông báo !","Info");
+            ToastService.ShowSuccess("Thông là thông báo !", "Info");
+            ToastService.ShowToast(ToastLevel.Info, "Thông là thông báo !", "Info");
+            ToastService.ShowWarning("Thông là thông báo !", "Info");
+            ToastService.ShowError("Thông là thông báo !", "Info");
+
+            //Tasks = await TaskApiClient.GetTaskList(TaskListSearch);
         }
     }
 }
