@@ -41,6 +41,7 @@ namespace TodoListApi
             });
 
             services.AddTransient<ITaskRepository, TaskRepository>();
+            services.AddTransient<IUserRepository, UserRepository>();
 
             services.AddCors(options =>
             {

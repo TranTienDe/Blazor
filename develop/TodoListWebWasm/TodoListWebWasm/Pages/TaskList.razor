@@ -1,43 +1,76 @@
 ﻿@page "/todolist"
 @using TodoListWebWasm.Components;
+@using TodoList.Models.Enums;
 
 <h3>Todo List</h3>
 
-@if (Tasks == null)
+@if (Tasks == null || Assignees == null)
 {
     <LoadingIndicator></LoadingIndicator>
 }
 else
 {
-    <div class="row mt-4">      
-            <table class="table">
-                <thead>
+    <div class="row">
+        <EditForm Model="@TaskListSearch">
+            <div class="row">
+                <div class="col">
+                    <label>Name</label>
+                    <InputText class="form-control" @bind-Value="@TaskListSearch.Name"></InputText>
+                </div>
+                <div class="col">
+                    <label>Assignee</label>
+                    <InputSelect class="form-control" @bind-Value="@TaskListSearch.AssigneeId">
+                        @foreach (var assignee in Assignees)
+                            {
+                            <option value="@assignee.Id">@assignee.FullName</option>
+                            }
+                    </InputSelect>
+                </div>
+                <div class="col">
+                    <label>Priority</label>
+                    <InputSelect class="form-control" @bind-Value="@TaskListSearch.Priority">
+                        @foreach (string item in Enum.GetNames(typeof(Priority)))
+                            {
+                            <option value="@item">@item</option>
+                            }
+                    </InputSelect>
+                </div>
+                <div class="d-flex align-items-end">
+                    <button class="btn btn-success" type="submit">Search</button>
+                </div>
+            </div>
+        </EditForm>
+
+    </div>
+    <div class="row mt-4">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Assignee</th>
+                    <th>Priority</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Tasks)
+                {
                     <tr>
-                        <th>Id</th>
-                        <th>Name</th>
-                        <th>Assignee</th>
-                        <th>Priority</th>
-                        <th>Date</th>
-                        <th>Status</th>
-                        <th></th>
+                        <td>@item.Id</td>
+                        <td>@item.Name</td>
+                        <td>@item.AssigneeName</td>
+                        <td>@item.Priority</td>
+                        <td>@item.CreatedDate.ToString("dd/MM/yyyy HH:mm tt")</td>
+                        <td>@item.Status</td>
+                        <td>
+                            <a href="/taskdetails/@item.Id">Details</a>
+                        </td>
                     </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Tasks)
-                    {
-                        <tr>
-                            <td>@item.Id</td>
-                            <td>@item.Name</td>
-                            <td>@item.AssigneeName</td>
-                            <td>@item.Priority</td>
-                            <td>@item.CreatedDate.ToString("dd/MM/yyyy HH:mm tt")</td>
-                            <td>@item.Status</td>
-                            <td>
-                                <a href="/taskdetails/@item.Id">Details</a>
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>      
+                }
+            </tbody>
+        </table>
     </div>
 }
