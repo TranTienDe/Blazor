@@ -42,14 +42,13 @@ a, .btn-link {
     z-index: 1000;
 }
 
-    #blazor-error-ui .dismiss {
-        cursor: pointer;
-        position: absolute;
-        right: 0.75rem;
-        top: 0.5rem;
-    }
-
-/*.spinner {
+#blazor-error-ui .dismiss {
+    cursor: pointer;
+    position: absolute;
+    right: 0.75rem;
+    top: 0.5rem;
+}
+.spinner {
     border: 16px solid silver;
     border-top: 16px solid #337ab7;
     border-radius: 50%;
@@ -69,4 +68,4 @@ a, .btn-link {
     100% {
         transform: rotate(360deg);
     }
-}*/
+}

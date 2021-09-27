@@ -1,10 +1,33 @@
-﻿@page "/taskDetails/{TaskId}"
+﻿@page "/taskdetails/{TaskId}"
+@using TodoListWebWasm.Components
 
-<h3>TaskDetails @TaskId</h3>
-
-@code {
-
-    [Parameter]
-    public string TaskId { get; set; }
-
+@if (Task == null)
+{
+    <LoadingIndicator></LoadingIndicator>
+}
+else
+{
+    <h3>Task Name: @Task.Name</h3>
+    <table class="table">
+        <tr>
+            <td>Name</td>
+            <td>@Task.Name</td>
+        </tr>
+        <tr>
+            <td>Assignee</td>
+            <td>@Task.AssigneeName</td>
+        </tr>
+        <tr>
+            <td>Date</td>
+            <td>@Task.CreatedDate.ToString("dd/MM/yyyy HH:mm tt")</td>
+        </tr>
+        <tr>
+            <td>Priority</td>
+            <td>@Task.Priority</td>
+        </tr>
+        <tr>
+            <td>Status</td>
+            <td>@Task.Status</td>
+        </tr>
+    </table>
 }

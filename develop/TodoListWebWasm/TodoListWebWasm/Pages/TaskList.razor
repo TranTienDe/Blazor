@@ -9,9 +9,8 @@
 }
 else
 {
-    <div class="row mt-4">
-        <div class="table">
-            <table>
+    <div class="row mt-4">      
+            <table class="table">
                 <thead>
                     <tr>
                         <th>Id</th>
@@ -34,12 +33,11 @@ else
                             <td>@item.CreatedDate.ToString("dd/MM/yyyy HH:mm tt")</td>
                             <td>@item.Status</td>
                             <td>
-                                <a href="/taskDetails/@item.Id">Details</a>
+                                <a href="/taskdetails/@item.Id">Details</a>
                             </td>
                         </tr>
                     }
                 </tbody>
-            </table>
-        </div>
+            </table>      
     </div>
 }

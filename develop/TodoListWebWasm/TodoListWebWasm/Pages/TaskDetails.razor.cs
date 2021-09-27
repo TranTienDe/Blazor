@@ -2,22 +2,26 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http;
 using System.Threading.Tasks;
 using TodoList.Models;
 using TodoListWebWasm.Services;
 
 namespace TodoListWebWasm.Pages
 {
-    public partial class TodoList
+    public partial class TaskDetails
     {
         [Inject] private ITaskApiClient TaskApiClient { get; set; }
 
-        private List<TaskDto> Tasks;
+        [Parameter]
+        public string TaskId { get; set; }
+
+        private TaskDto Task;
 
         protected override async Task OnInitializedAsync()
         {
-            Tasks = await TaskApiClient.GetTaskList();
+            Task = await TaskApiClient.GetTaskDetail(TaskId);
         }
+
+
     }
 }
