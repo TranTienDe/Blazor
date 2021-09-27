@@ -65,7 +65,7 @@ namespace TodoListApi.Controllers
                 Id = request.Id,
                 Name = request.Name,
                 CreatedDate = DateTime.Now,
-                Priority = request.Priority,
+                Priority = request.Priority.HasValue ? request.Priority.Value : Priority.Low,
                 Status = Status.Open
             });
             return CreatedAtAction(nameof(GetById), new { id = taskAdded.Id }, taskAdded);

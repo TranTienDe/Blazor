@@ -9,11 +9,14 @@ using TodoList.Models.Enums;
 namespace TodoList.Models
 {
     public class TaskCreateRequest
-    {      
-        public Guid Id { get; set; }
-        [Required]
-        [MaxLength(250)]
+    {
+        public Guid Id { get; set; } = Guid.NewGuid();
+
+        [MaxLength(20, ErrorMessage = "Độ dài chuỗi không quá 20 kí tự.")]
+        [Required(ErrorMessage = "Vui lòng nhập tên. ")]
         public string Name { get; set; }
-        public Priority Priority { get; set; }     
+
+        [Required(ErrorMessage = "Vui lòng chọn độ ưu tiên.")]
+        public Priority? Priority { get; set; }
     }
 }
