@@ -22,10 +22,11 @@ namespace TodoListApi.Controllers
             this._repository = repository;
         }
 
+        //api/taks?name=
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll([FromQuery] TaskListSearch taskListSearch)
         {
-            var tasks = await _repository.GetTaskList();
+            var tasks = await _repository.GetTaskList(taskListSearch);
             var taskDtos = tasks.Select(x => new TaskDto
             {
                 Id = x.Id,

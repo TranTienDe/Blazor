@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Forms;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,15 +22,13 @@ namespace TodoListWebWasm.Pages
 
         protected override async Task OnInitializedAsync()
         {
-            Tasks = await TaskApiClient.GetTaskList();
+            Tasks = await TaskApiClient.GetTaskList(TaskListSearch);
             Assignees = await UserApiClient.GetUserList();
         }
-    }
 
-    public class TaskListSearch
-    {
-        public string Name { get; set; }
-        public Guid AssigneeId { get; set; }
-        public Priority Priority { get; set; }
+        private async Task SearchForm(EditContext context)
+        {
+            Tasks = await TaskApiClient.GetTaskList(TaskListSearch);
+        }
     }
 }

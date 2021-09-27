@@ -12,3 +12,6 @@
 ## Thêm ASP.Net Core identity chứa bảng user, role...
 1. Microsoft.AspNetCore.Identity.EntityFrameworkCore
 
+## TEDU Series
+https://www.youtube.com/watch?v=YA0eQlMAvJE&list=PLRhlTlpDUWszBRs388Koxf6sMBSuOs8cd&index=20
+
