@@ -31,7 +31,7 @@ namespace TodoListApi.Repositories
             if (taskListSearch.Priority.HasValue)
                 query = query.Where(x => x.Priority == taskListSearch.Priority.Value);
 
-            return await query.ToListAsync();
+            return await query.OrderByDescending(x => x.CreatedDate).ToListAsync();
         }
 
         public async Task<Task> GetById(Guid id)

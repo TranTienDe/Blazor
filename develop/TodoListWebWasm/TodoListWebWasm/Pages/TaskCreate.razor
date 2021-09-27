@@ -1,9 +1,10 @@
 ﻿@page "/taskcreate"
 @using TodoList.Models.Enums;
+@inject NavigationManager NavigationManager;
 
 <h3>Task Create</h3>
 
-<EditForm Model="@Task">
+<EditForm Model="@Task" OnValidSubmit=@SubmitTask>
     <DataAnnotationsValidator />
     <div class="mb-3">
         <label for="Name" class="form-label">Name</label>

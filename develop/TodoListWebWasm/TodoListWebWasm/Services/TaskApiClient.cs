@@ -30,5 +30,10 @@ namespace TodoListWebWasm.Services
             return await _httpClient.GetFromJsonAsync<TaskDto>($"/api/tasks/{id}");
         }
 
+        public async Task<bool> CreateTask(TaskCreateRequest request)
+        {
+            var result = await _httpClient.PostAsJsonAsync("/api/tasks", request);
+            return result.IsSuccessStatusCode;
+        }
     }
 }
