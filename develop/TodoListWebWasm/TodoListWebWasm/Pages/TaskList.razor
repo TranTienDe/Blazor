@@ -1,6 +1,7 @@
 ﻿@page "/todolist"
 @using TodoListWebWasm.Components;
 @using TodoList.Models.Enums;
+@inject IConfiguration Configuration
 
 <h3>Todo List 1</h3>
 
@@ -66,7 +67,7 @@ else
                         <td>@item.Name</td>
                         <td>@item.AssigneeName</td>
                         <td><PriorityLabel Priority="item.Priority"></PriorityLabel></td>
-                        <td>@item.CreatedDate.ToString("dd/MM/yyyy HH:mm tt")</td>
+                        <td>@item.CreatedDate.ToString(Configuration["DateTimeFormat"])</td>
                         <td><StatusLabel Status="item.Status"></StatusLabel></td>
                         <td>
                             <a href="/taskdetails/@item.Id">Details</a>
