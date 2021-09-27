@@ -1,9 +1,38 @@
 ﻿@page "/todolist"
 
-<h3>TodoList</h3>
+<h3>Todo List</h3>
 
-<button class="btn btn-primary">Click me!</button>
-
-@code {
-
+@if (Tasks == null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <div class="row mt-4">
+        <div class="table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Assignee</th>
+                        <th>Priority</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Tasks)
+                    {
+                        <tr>
+                            <td>@item.Name</td>
+                            <td>@item.AssigneeName</td>
+                            <td>@item.Priority</td>
+                            <td>@item.CreatedDate.ToString("dd/MM/yyyy HH:mm tt")</td>
+                            <td>@item.Status</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
 }
