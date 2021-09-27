@@ -1,0 +1,28 @@
+﻿@using TodoList.Models.Enums;
+
+@switch (Status)
+{
+    case Status.Open:
+        <span class="badge bg-info text-light">@nameof(Status.Open)</span>
+        break;
+    case Status.Inprogress:
+        <span class="badge bg-primary text-light">@nameof(Status.Inprogress)</span>
+        break;
+    case Status.Resolved:
+        <span class="badge bg-success text-light">@nameof(Status.Resolved)</span>
+        break;
+    case Status.Done:
+        <span class="badge bg-secondary text-light">@nameof(Status.Done)</span>
+        break;
+    case Status.Canceled:
+        <span class="badge bg-warning text-light">@nameof(Status.Canceled)</span>
+        break;
+    case Status.Closed:
+        <span class="badge bg-dark text-light">@nameof(Status.Closed)</span>
+        break;
+}
+
+@code {
+    [Parameter]
+    public Status Status { get; set; }
+}
