@@ -4,8 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TodoList.Models.Enums;
 using TodoListApi.Entities;
-using TodoListApi.Enums;
 using Task = System.Threading.Tasks.Task;
 
 namespace TodoListApi.Data

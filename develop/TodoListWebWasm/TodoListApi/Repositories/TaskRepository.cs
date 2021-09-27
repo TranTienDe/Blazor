@@ -19,7 +19,7 @@ namespace TodoListApi.Repositories
 
         public async Task<IEnumerable<Task>> GetTaskList()
         {
-            return await _context.Tasks.ToListAsync();
+            return await _context.Tasks.Include(x => x.Assignee).ToListAsync();
         }
 
         public async Task<Task> GetById(Guid id)
