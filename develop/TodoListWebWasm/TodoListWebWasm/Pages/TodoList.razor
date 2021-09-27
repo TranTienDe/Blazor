@@ -1,10 +1,11 @@
 ﻿@page "/todolist"
+@using TodoListWebWasm.Components;
 
 <h3>Todo List</h3>
 
 @if (Tasks == null)
 {
-    <p>Loading...</p>
+   <LoadingIndicator></LoadingIndicator>
 }
 else
 {
