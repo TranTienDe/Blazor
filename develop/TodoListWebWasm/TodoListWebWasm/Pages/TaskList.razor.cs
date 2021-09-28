@@ -8,6 +8,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using TodoList.Models;
 using TodoList.Models.Enums;
+using TodoList.Models.SeedWork;
 using TodoListWebWasm.Components;
 using TodoListWebWasm.Pages.Components;
 using TodoListWebWasm.Services;
@@ -28,9 +29,11 @@ namespace TodoListWebWasm.Pages
 
         protected AssignTask AssignTaskDialog { set; get; }
 
+        public MetaData MetaData { get; set; } = new MetaData();
+
         protected override async Task OnInitializedAsync()
         {
-            Tasks = await TaskApiClient.GetTaskList(TaskListSearch);
+            await GetTasks();
         }
 
         private async Task SearchForm(TaskListSearch taskListSearch)
@@ -42,7 +45,7 @@ namespace TodoListWebWasm.Pages
             ToastService.ShowError("Thông là thông báo !", "Info");*/
 
             TaskListSearch = taskListSearch;
-            Tasks = await TaskApiClient.GetTaskList(TaskListSearch);
+            await GetTasks();
         }
 
         private async Task OnDeleteTask(Guid id)
@@ -60,7 +63,7 @@ namespace TodoListWebWasm.Pages
             if (result)
             {
                 ToastService.ShowSuccess("Xóa dữ liệu thành công !", "Thống báo");
-                Tasks = await TaskApiClient.GetTaskList(TaskListSearch);
+                await GetTasks();
             }
             else
             {
@@ -77,8 +80,29 @@ namespace TodoListWebWasm.Pages
         {
             if (result)
             {
-                Tasks = await TaskApiClient.GetTaskList(TaskListSearch);
+                await GetTasks();
             }
+        }
+
+        private async Task GetTasks()
+        {
+            try
+            {
+                var pagingResponse = await TaskApiClient.GetTaskList(TaskListSearch);
+                Tasks = pagingResponse.Items;
+                MetaData = pagingResponse.MetaData;
+            }
+            catch (Exception ex)
+            {
+                //Error.ProcessError(ex);
+            }
+
+        }
+
+        private async Task SelectedPage(int page)
+        {
+            TaskListSearch.PageNumber = page;
+            await GetTasks();
         }
 
     }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TodoList.Models;
+using TodoList.Models.SeedWork;
 using TodoListApi.Data;
 using Task = TodoListApi.Entities.Task;
 
@@ -18,7 +19,7 @@ namespace TodoListApi.Repositories
             this._context = context;
         }
 
-        public async Task<IEnumerable<Task>> GetTaskList(TaskListSearch taskListSearch)
+        public async Task<PagedList<Task>> GetTaskList(TaskListSearch taskListSearch)
         {
             var query = _context.Tasks.Include(x => x.Assignee).AsQueryable();
 
@@ -31,7 +32,14 @@ namespace TodoListApi.Repositories
             if (taskListSearch.Priority.HasValue)
                 query = query.Where(x => x.Priority == taskListSearch.Priority.Value);
 
-            return await query.OrderByDescending(x => x.CreatedDate).ToListAsync();
+            var count = await query.CountAsync();
+
+            var data = await query.OrderByDescending(x => x.CreatedDate)
+                .Skip((taskListSearch.PageNumber - 1) * taskListSearch.PageSize) // Dòng bắt đầu lấy ra.
+                .Take(taskListSearch.PageSize)                                   // Lấy bao nhiêu dòng.
+                .ToListAsync();
+
+            return new PagedList<Entities.Task>(data, count, taskListSearch.PageNumber, taskListSearch.PageSize);
         }
 
         public async Task<Task> GetById(Guid id)
