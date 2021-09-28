@@ -12,7 +12,7 @@
 else
 {
     <div class="row">
-       <TaskSearch OnSearch="SearchForm"></TaskSearch>
+        <TaskSearch OnSearch="SearchForm"></TaskSearch>
     </div>
 
     <div class="row mt-4">
@@ -39,12 +39,16 @@ else
                         <td>@item.CreatedDate.ToString(Configuration["DateTimeFormat"])</td>
                         <td><StatusLabel Status="item.Status"></StatusLabel></td>
                         <td>
-                            <a href="/taskdetails/@item.Id">Details</a>
-                            <a href="/taskedit/@item.Id">Edit</a>
+                            <a href="/taskdetails/@item.Id" class="btn btn-primary">Details</a>
+                            <a href="/taskedit/@item.Id" class="btn btn-warning">Edit</a>
+                            <button class="btn btn-danger" @onclick="()=> OnDeleteTask(item.Id)">Delete</button>
                         </td>
                     </tr>
                 }
             </tbody>
         </table>
     </div>
+
+    <Confirmation @ref="DeleteConfirmation"
+                  ConfirmationChanged="OnConfirmationChanged"></Confirmation>
 }

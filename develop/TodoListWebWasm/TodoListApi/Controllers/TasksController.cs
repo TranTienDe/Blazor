@@ -96,7 +96,7 @@ namespace TodoListApi.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(Guid id)
+        public async Task<IActionResult> Delete([FromRoute] Guid id)
         {
             var taskFind = await _repository.GetById(id);
             if (taskFind == null) return NotFound($"{id} is not found !");

@@ -8,6 +8,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using TodoList.Models;
 using TodoList.Models.Enums;
+using TodoListWebWasm.Components;
 using TodoListWebWasm.Services;
 
 namespace TodoListWebWasm.Pages
@@ -20,6 +21,9 @@ namespace TodoListWebWasm.Pages
 
         private List<TaskDto> Tasks;
         private TaskListSearch TaskListSearch = new TaskListSearch();
+        private TaskDto TaskItem { get; set; }
+
+        private Confirmation DeleteConfirmation { get; set; } // Đối tượng tham chiếu tối View.
 
         protected override async Task OnInitializedAsync()
         {
@@ -37,5 +41,30 @@ namespace TodoListWebWasm.Pages
             TaskListSearch = taskListSearch;
             Tasks = await TaskApiClient.GetTaskList(TaskListSearch);
         }
+
+        private async Task OnDeleteTask(Guid id)
+        {
+            TaskItem = Tasks.FirstOrDefault(x => x.Id == id);
+            DeleteConfirmation.Title = "Xóa dữ liệu";
+            DeleteConfirmation.Content = $"Bạn chắc chắn muốn xóa {TaskItem.Name}";
+            DeleteConfirmation.Show();
+        }
+
+        private async Task OnConfirmationChanged(bool deleteConfirmed)
+        {
+            if (!deleteConfirmed) return;
+            var result = await TaskApiClient.DeleteTask(TaskItem.Id);
+            if (result)
+            {
+                ToastService.ShowSuccess("Xóa dữ liệu thành công !", "Thống báo");
+                Tasks = await TaskApiClient.GetTaskList(TaskListSearch);
+            }
+            else
+            {
+                ToastService.ShowError("Xóa dữ liệu chưa thành công !", "Thống báo");
+            }
+        }
+
+
     }
 }

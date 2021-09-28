@@ -16,5 +16,7 @@ namespace TodoListWebWasm.Services
 
         Task<bool> UpdateTask(Guid id, TaskUpdateRequest request);
 
+        Task<bool> DeleteTask(Guid id);
+
     }
 }
