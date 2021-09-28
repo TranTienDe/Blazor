@@ -11,6 +11,8 @@ namespace TodoListWebWasm.Services
     {
         Task<PagedList<TaskDto>> GetTaskList(TaskListSearch taskListSearch);
 
+        Task<PagedList<TaskDto>> GetMyTasks(TaskListSearch taskListSearch);
+
         Task<TaskDto> GetTaskDetail(string id);
 
         Task<bool> CreateTask(TaskCreateRequest request);
