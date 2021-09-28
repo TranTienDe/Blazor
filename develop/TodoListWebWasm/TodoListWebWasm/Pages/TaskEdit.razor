@@ -1,0 +1,39 @@
+﻿@page "/taskedit/{TaskId}"
+@using TodoList.Models.Enums;
+@using TodoListWebWasm.Components;
+@inject NavigationManager NavigationManager;
+
+@if (Task == null)
+{
+    <LoadingIndicator></LoadingIndicator>
+}
+else
+{
+    <h3>Edit task name: @Task.Name </h3>
+
+    <EditForm Model="@Task" OnValidSubmit=@SubmitTask>
+        <DataAnnotationsValidator />
+        <div class="mb-3">
+            <label for="Name" class="form-label">Name</label>
+            <InputText class="form-control" id="Name" @bind-Value="@Task.Name"></InputText>
+            <ValidationMessage For="() => Task.Name"></ValidationMessage>
+            <small id="namelHelp" class="form-text text-muted">Please enter title.</small>
+        </div>
+
+        <div class="mb-3">
+            <label for="Priority" class="form-label">Priority</label>
+            <InputSelect class="form-control" id="Priority" @bind-Value="@Task.Priority">
+                <option>Select priority</option>
+                @foreach (string item in Enum.GetNames(typeof(Priority)))
+                    {
+                    <option value="@item">@item</option>
+                    }
+            </InputSelect>
+            <ValidationMessage For="() => Task.Priority"></ValidationMessage>
+            <small id="namelHelp" class="form-text text-muted">Please choose priority which you want.</small>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Update</button>
+
+    </EditForm>
+}

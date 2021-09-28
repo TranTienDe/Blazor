@@ -13,7 +13,7 @@
 1. Microsoft.AspNetCore.Identity.EntityFrameworkCore
 
 ## TEDU Series
-https://www.youtube.com/watch?v=YA0eQlMAvJE&list=PLRhlTlpDUWszBRs388Koxf6sMBSuOs8cd&index=20
+https://www.youtube.com/watch?v=XHzciuH0EEQ&list=PLRhlTlpDUWszBRs388Koxf6sMBSuOs8cd&index=28
 
 ## Bài 25: Hiển thị Toast message
 Package tham khảo: https://github.com/Blazored/toast

@@ -30,13 +30,13 @@ namespace TodoListWebWasm.Pages
 
         private async Task SearchForm(EditContext context)
         {
-            //ToastService.ShowInfo("Thông là thông báo !","Info");
+            /*ToastService.ShowInfo("Thông là thông báo !","Info");
             ToastService.ShowSuccess("Thông là thông báo !", "Info");
             ToastService.ShowToast(ToastLevel.Info, "Thông là thông báo !", "Info");
             ToastService.ShowWarning("Thông là thông báo !", "Info");
-            ToastService.ShowError("Thông là thông báo !", "Info");
+            ToastService.ShowError("Thông là thông báo !", "Info");*/
 
-            //Tasks = await TaskApiClient.GetTaskList(TaskListSearch);
+            Tasks = await TaskApiClient.GetTaskList(TaskListSearch);
         }
     }
 }
