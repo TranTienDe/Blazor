@@ -1,5 +1,6 @@
 ﻿@page "/todolist"
 @using TodoListWebWasm.Components;
+@using TodoListWebWasm.Pages.Components;
 @using TodoList.Models.Enums;
 @inject IConfiguration Configuration
 
@@ -34,7 +35,7 @@ else
                     <tr>
                         <td>@item.Id</td>
                         <td>@item.Name</td>
-                        <td>@item.AssigneeName</td>
+                        <td><a style="cursor:pointer;" @onclick="()=>OpenAssignPopup(item.Id)">@item.AssigneeName</a></td>
                         <td><PriorityLabel Priority="item.Priority"></PriorityLabel></td>
                         <td>@item.CreatedDate.ToString(Configuration["DateTimeFormat"])</td>
                         <td><StatusLabel Status="item.Status"></StatusLabel></td>
@@ -51,4 +52,6 @@ else
 
     <Confirmation @ref="DeleteConfirmation"
                   ConfirmationChanged="OnConfirmationChanged"></Confirmation>
+
+    <AssignTask @ref="AssignTaskDialog" CloseEventCallbak="AssignTaskSuccess"></AssignTask>
 }

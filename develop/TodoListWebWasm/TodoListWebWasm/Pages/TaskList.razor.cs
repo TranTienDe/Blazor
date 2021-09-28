@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using TodoList.Models;
 using TodoList.Models.Enums;
 using TodoListWebWasm.Components;
+using TodoListWebWasm.Pages.Components;
 using TodoListWebWasm.Services;
 
 namespace TodoListWebWasm.Pages
@@ -24,6 +25,8 @@ namespace TodoListWebWasm.Pages
         private TaskDto TaskItem { get; set; }
 
         private Confirmation DeleteConfirmation { get; set; } // Đối tượng tham chiếu tối View.
+
+        protected AssignTask AssignTaskDialog { set; get; }
 
         protected override async Task OnInitializedAsync()
         {
@@ -65,6 +68,18 @@ namespace TodoListWebWasm.Pages
             }
         }
 
+        public void OpenAssignPopup(Guid id)
+        {
+            AssignTaskDialog.Show(id);
+        }
+
+        public async Task AssignTaskSuccess(bool result)
+        {
+            if (result)
+            {
+                Tasks = await TaskApiClient.GetTaskList(TaskListSearch);
+            }
+        }
 
     }
 }
