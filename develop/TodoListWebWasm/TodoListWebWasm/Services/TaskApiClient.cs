@@ -34,7 +34,7 @@ namespace TodoListWebWasm.Services
             if (taskListSearch.Priority.HasValue)
                 queryStringParam.Add("priority", taskListSearch.Priority.ToString());
 
-            string url = QueryHelpers.AddQueryString("/api/tasks", queryStringParam);
+            string url = QueryHelpers.AddQueryString("/api/task", queryStringParam);
 
             var result = await _httpClient.GetFromJsonAsync<PagedList<TaskDto>>(url);
             return result;

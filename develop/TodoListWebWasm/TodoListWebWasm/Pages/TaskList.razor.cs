@@ -12,6 +12,7 @@ using TodoList.Models.SeedWork;
 using TodoListWebWasm.Components;
 using TodoListWebWasm.Pages.Components;
 using TodoListWebWasm.Services;
+using TodoListWebWasm.Shared;
 
 namespace TodoListWebWasm.Pages
 {
@@ -30,6 +31,9 @@ namespace TodoListWebWasm.Pages
         protected AssignTask AssignTaskDialog { set; get; }
 
         public MetaData MetaData { get; set; } = new MetaData();
+
+        [CascadingParameter]
+        private Error Error { set; get; }
 
         protected override async Task OnInitializedAsync()
         {
@@ -94,7 +98,7 @@ namespace TodoListWebWasm.Pages
             }
             catch (Exception ex)
             {
-                //Error.ProcessError(ex);
+                Error.ProcessError(ex);
             }
 
         }
